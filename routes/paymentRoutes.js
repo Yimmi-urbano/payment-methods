@@ -1,10 +1,10 @@
 const express = require('express');
 const { body } = require('express-validator');
 const paymentController = require('../controllers/paymentController');
+const tokenController = require('../controllers/createToken')
 
 const router = express.Router();
 
-// 📌 Registrar un método de pago (POST)
 router.post(
   '/',
   [
@@ -15,11 +15,8 @@ router.post(
   ],
   paymentController.createPaymentMethod
 );
-
-// 📌 Obtener métodos de pago por dominio (GET)
 router.get('/', paymentController.getPaymentsByDomain);
 
-// 📌 Actualizar un método de pago (PUT)
 router.put(
   '/:id',
   [
@@ -35,5 +32,6 @@ router.put(
 
 router.delete('/:id', paymentController.deletePaymentMethod);
 router.get('/:nameId', paymentController.getPaymentByNameId);
+router.post('/token/:methodPayment',  tokenController.createToken)
 
 module.exports = router;

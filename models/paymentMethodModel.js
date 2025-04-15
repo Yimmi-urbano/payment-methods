@@ -9,6 +9,7 @@ const PaymentMethodSchema = new mongoose.Schema(
         details: { type: Object, required: true },
         isActive: { type: Boolean, default: false },
         customField: { type: Object },
+        isDev: { type: Boolean, default: true },
         credentials: {
             publicKey: { type: String },
             privateKey: { type: String, select: false }, // 🔐 Ahora encriptado con AES
@@ -17,7 +18,8 @@ const PaymentMethodSchema = new mongoose.Schema(
             merchantId: { type: String }
         }
     },
-    { timestamps: true }
+    { timestamps: true },
+    
 );
 
 // 🔐 Encriptar privateKey antes de guardar
